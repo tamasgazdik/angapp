@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { Calculator } from "src/calculator/calculator.component";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-component',
+  templateUrl: './app.component.html'
 })
-export class AppComponent {
-  title = 'angapp';
+export class AppComponent
+{
+  pageTitle: string = 'angapp2';
+
+  numbers(db:number) {
+    return new Array(Calculator.add(db, db));
+  }
 }
