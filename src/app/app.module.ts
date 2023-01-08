@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BookListComponent } from "src/books/book-list.component";
 import { AppComponent } from './app.component';
@@ -9,7 +10,8 @@ import { AppComponent } from './app.component';
     BookListComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   bootstrap: [
     AppComponent
