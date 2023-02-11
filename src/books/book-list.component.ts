@@ -1,25 +1,48 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
+import { IBook } from './book';
 
 @Component({
   selector: 'book-list',
-  templateUrl: './book-list.component.html'
+  templateUrl: './book-list.component.html',
+  styleUrls: [ './book-list.component.css' ]
 })
-export class BookListComponent {
+export class BookListComponent implements OnInit {
   listTitle: string = 'Book list';
   imageWidth: number = 75;
   imageMargin: number = 2;
   imagesVisible: boolean = false;
-  filter: string = '';
-  bookList: Book[] = [
+
+  private _filter: string = '';
+  private bookList: Book[] = [
     new Book('How to stop worrying, and start living.', '..\\assets\\images\\how_to_stop_worrying.jpg', 3500),
     new Book('How to make friends, and influence people.', '..\\assets\\images\\how_to_win_friends.jpg', 3200),
   ];
+  private _filteredBookList: Book[] = [];
 
-  // TODO: find out how to filter the bookList
-  filteredBookList = this.bookList.filter(
-    b => b.title.includes(this.filter)
-  );
+  ngOnInit(): void {
+    this.filter = 'Anyád';
+    console.log('BookListComponent initialized.');
+  }
 
+  get filter() : string {
+    return this._filter;
+  }
+
+  set filter(value)
+  {
+    this._filter = value;
+    console.log(this.filter);
+    this.filterBookList(value);
+  }
+
+  get filteredBookList() : Book[]
+  {
+    return this.bookList.filter(book => book.title.toLocaleLowerCase().includes(this.filter.toLocaleLowerCase()) || book.title.toLocaleLowerCase().startsWith(this.filter.toLocaleLowerCase()));
+  }
+
+  set filteredBookList(value: Book[]) {
+    this._filteredBookList = value;
+  }
   toggleImageVisibility() : void
   {
     this.imagesVisible = !this.imagesVisible;
@@ -30,20 +53,22 @@ export class BookListComponent {
     this.imageWidth = 300 - this.imageWidth;
   }
 
-  logFilter() : void
+  filterBookList(filter: string)
   {
-    console.info(this.filter);
+      this.filteredBookList = this.bookList.filter((book: Book) => {
+      book.title.includes(filter);
+    })
   }
 }
 
-class Book {
+class Book implements IBook {
   private static _id: number = 0;
 
   title: string;
-  id: number = 0;
+  id: number;
   firstImpressions : string = '';
   started: boolean = this.firstImpressions != '';
-  price: number = 0;
+  price: number;
 
   constructor(title: string, readonly imageUrl: string, price: number = 0) {
         this.title = title;

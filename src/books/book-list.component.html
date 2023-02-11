@@ -19,7 +19,7 @@
     </div>
     <!-- Twitter (?) css used via bootstrap I guess -->
     <div class="table-responsive">
-      <table class="table" *ngIf="bookList.length">
+      <table class="table" *ngIf="filteredBookList.length">
         <thead>
           <tr>
             <th>
@@ -35,7 +35,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let book of bookList'>
+          <tr *ngFor='let book of filteredBookList'>
             <td>
               <img *ngIf='imagesVisible'
                   [src]='book.imageUrl'
@@ -46,7 +46,7 @@
                   (click)='showFullImage()'
                   clickable='true'/>
             </td>
-            <td>{{book.title | lowercase}}</td>
+            <td>{{book.title | transfortospace:',' }}</td>
             <td>{{book.id}}</td>
             <td>{{book.started}}</td>
             <td>{{book.price | currency:'Ft ':'symbol':'1.2-2'}}</td>
