@@ -1,5 +1,5 @@
-import { Component, NgModule, OnInit } from '@angular/core';
-import { IBook } from './book';
+import { Component, OnInit } from '@angular/core';
+import { IBook } from './ibook';
 
 @Component({
   selector: 'book-list',
@@ -17,11 +17,14 @@ export class BookListComponent implements OnInit {
     new Book('How to stop worrying, and start living.', '..\\assets\\images\\how_to_stop_worrying.jpg', 3500),
     new Book('How to make friends, and influence people.', '..\\assets\\images\\how_to_win_friends.jpg', 3200),
   ];
-  private _filteredBookList: Book[] = [];
+  private _filteredBookList: Book[];
 
   ngOnInit(): void {
     this.filter = 'Anyád';
-    console.log('BookListComponent initialized.');
+  }
+
+  constructor(){
+    this._filteredBookList = [];
   }
 
   get filter() : string {
@@ -31,7 +34,6 @@ export class BookListComponent implements OnInit {
   set filter(value)
   {
     this._filter = value;
-    console.log(this.filter);
     this.filterBookList(value);
   }
 

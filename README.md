@@ -1,3 +1,11 @@
+## For devs:
+1. Clear cache by executing: `npm cache clear --force`<br>
+2. Install python by executing: `npm install -g python`<br>
+3. Install Angular CLI by executing: `npm install -g angular-cli`<br>
+4. Install dependencies by executing: `npm install`<br>
+5. Start the angular project by issuing: `npm start` 
+
+
 # Angapp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.2.
