@@ -16,10 +16,13 @@
       <div class="col-md-6">
         <h4>Filtered by: {{filter}}</h4>
       </div>
+      <div class="col-md-6" *ngIf="selectedStar">
+        <h4>Selected star: {{selectedStar | zeroToEmpty}}</h4>
+      </div>
     </div>
     <!-- Twitter (?) css used via bootstrap I guess -->
     <div class="table-responsive">
-      <table class="table" *ngIf="filteredBookList.length">
+      <table class="table">
         <thead>
           <tr>
             <th>
@@ -32,6 +35,7 @@
             <th>ID</th>
             <th>Started</th>
             <th>Price</th>
+            <th>Rating</th>
           </tr>
         </thead>
         <tbody>
@@ -46,10 +50,14 @@
                   (click)='showFullImage()'
                   clickable='true'/>
             </td>
-            <td>{{book.title | transfortospace:',' }}</td>
+            <td>{{book.title | transformtospace:',' }}</td>
             <td>{{book.id}}</td>
             <td>{{book.started}}</td>
             <td>{{book.price | currency:'Ft ':'symbol':'1.2-2'}}</td>
+            <td>
+              <star [rating]='book.rating'
+                    (notify)='onNotify($event)'></star>
+            </td>
           </tr>
         </tbody>
       </table>

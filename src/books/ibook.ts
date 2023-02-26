@@ -4,4 +4,5 @@ export interface IBook {
   firstImpressions : string;
   started: boolean;
   price: number;
+  rating: number;
 }

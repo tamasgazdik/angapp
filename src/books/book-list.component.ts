@@ -11,20 +11,17 @@ export class BookListComponent implements OnInit {
   imageWidth: number = 75;
   imageMargin: number = 2;
   imagesVisible: boolean = false;
+  selectedStar: number = 0;
 
   private _filter: string = '';
   private bookList: Book[] = [
-    new Book('How to stop worrying, and start living.', '..\\assets\\images\\how_to_stop_worrying.jpg', 3500),
-    new Book('How to make friends, and influence people.', '..\\assets\\images\\how_to_win_friends.jpg', 3200),
+    new Book('How to stop worrying, and start living.', '..\\assets\\images\\how_to_stop_worrying.jpg', 3500, 4),
+    new Book('How to make friends, and influence people.', '..\\assets\\images\\how_to_win_friends.jpg', 3200, 4.5),
   ];
-  private _filteredBookList: Book[];
+  private _filteredBookList: Book[] = [];
 
   ngOnInit(): void {
-    this.filter = 'Anyád';
-  }
-
-  constructor(){
-    this._filteredBookList = [];
+    this.filter = 'Filter';
   }
 
   get filter() : string {
@@ -61,7 +58,12 @@ export class BookListComponent implements OnInit {
       book.title.includes(filter);
     })
   }
-}
+
+  onNotify(rate: number){
+    this.selectedStar = rate;
+  }
+
+  }
 
 class Book implements IBook {
   private static _id: number = 0;
@@ -71,11 +73,13 @@ class Book implements IBook {
   firstImpressions : string = '';
   started: boolean = this.firstImpressions != '';
   price: number;
+  rating: number;
 
-  constructor(title: string, readonly imageUrl: string, price: number = 0) {
+  constructor(title: string, readonly imageUrl: string, price: number = 0, rating: number = 1) {
         this.title = title;
         // start id's from 0
         this.id = Book._id++;
         this.price = price;
+        this.rating = rating;
   }
 }

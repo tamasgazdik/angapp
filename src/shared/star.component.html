@@ -1,0 +1,17 @@
+<div class="crop"
+    [style.width.px]="cropWidth"
+    [title]="rating"
+    (click)='onClick()'>
+    <!-- 
+        style.width.px -> property binding, this way we achieve partial stars
+        title -> property binding, so that when mouse hovers over it, it displays the numeric value
+    -->
+    <div style="width: 75px">
+        <!-- font-awesome star shit, each star is 15px wide -->
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+    </div>
+</div>
